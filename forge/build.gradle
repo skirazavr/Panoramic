@@ -1,0 +1,79 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[7.0.25,8)'
+}
+
+base {
+    archivesName = "${mod_id}-forge"
+}
+
+repositories {
+    // noinspection GroovyAssignabilityCheck
+    minecraft.mavenizer(it)
+    maven fg.forgeMaven
+    maven fg.minecraftLibsMaven
+    mavenCentral()
+}
+
+dependencies {
+    implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+    annotationProcessor 'net.minecraftforge:eventbus-validator:7.0.1'
+}
+
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+
+    runs {
+        configureEach {
+            workingDir = layout.projectDirectory.dir("run/${name}")
+
+            systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
+            systemProperty 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        client {}
+
+        server {
+            args '--nogui'
+        }
+
+        gameTestServer {}
+
+        data {
+            workingDir = layout.projectDirectory.dir('run-data')
+
+            args '--mod', mod_id,
+                    '--all',
+                    '--output', file('src/generated/resources/').absolutePath,
+                    '--existing', file('src/main/resources/').absolutePath
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir '../common/src/main/resources'
+            srcDir 'src/generated/resources'
+        }
+    }
+}
+
+def mergedDir = layout.buildDirectory.dir("merged")
+
+sourceSets.main {
+    it.output.resourcesDir = mergedDir.get().asFile
+    it.java.destinationDirectory = mergedDir
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}

@@ -1,0 +1,11 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    withSourcesJar()
+}
+
+base {
+    archivesName = "${mod_id}-common"
+}

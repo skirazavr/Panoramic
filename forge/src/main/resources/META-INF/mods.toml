@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[62,)"
+license="MIT License"
+clientSideOnly=true
+
+[[mods]]
+modId="panoramic"
+version="26.1.x"
+displayName="Panoramic"
+logoFile="logo.png"
+authors="Skirazavr"
+description='''Just a simple mod to create panoramas.'''
+
+[[dependencies.panoramic]]
+    modId="forge"
+    mandatory=true
+    versionRange="[62,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.panoramic]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[26.1,26.2,)"
+    ordering="NONE"
+    side="BOTH"
