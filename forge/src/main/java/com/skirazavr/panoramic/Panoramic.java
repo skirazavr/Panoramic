@@ -19,13 +19,11 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import org.lwjgl.glfw.GLFW;
-
 @Mod(value = "panoramic")
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class Panoramic {
-	public static final KeyMapping PANORAMA_KEY = new KeyMapping("key.panoramic.create", InputConstants.Type.KEYSYM,
-			GLFW.GLFW_KEY_F9, KeyMapping.Category.MISC);
+	public static final KeyMapping PANORAMA_KEY = new KeyMapping("key.panoramic.create", InputConstants.Type.KEYBOARD,
+		InputConstants.KEY_F9, KeyMapping.Category.MISC);
 
 	@SubscribeEvent
 	public static void onClientTick(TickEvent.ClientTickEvent.Post event) {

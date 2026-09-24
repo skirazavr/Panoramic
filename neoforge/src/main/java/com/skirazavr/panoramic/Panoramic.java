@@ -20,13 +20,11 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
-import org.lwjgl.glfw.GLFW;
-
 @Mod(value = "panoramic", dist = Dist.CLIENT)
 @EventBusSubscriber(Dist.CLIENT)
 public class Panoramic {
-	public static final KeyMapping PANORAMA_KEY = new KeyMapping("key.panoramic.create", InputConstants.Type.KEYSYM,
-			GLFW.GLFW_KEY_F9, KeyMapping.Category.MISC);
+	public static final KeyMapping PANORAMA_KEY = new KeyMapping("key.panoramic.create", InputConstants.Type.KEYBOARD,
+		InputConstants.KEY_F9, KeyMapping.Category.MISC);
 
 	@SubscribeEvent
 	public static void onClientTick(ClientTickEvent.Post event) {
